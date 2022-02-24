@@ -1,0 +1,7 @@
+D:\Учеба\Programing\Skillbox\Homework_3\bin\Debug\Homework_3.exe.config
+D:\Учеба\Programing\Skillbox\Homework_3\bin\Debug\Homework_3.exe
+D:\Учеба\Programing\Skillbox\Homework_3\bin\Debug\Homework_3.pdb
+D:\Учеба\Programing\Skillbox\Homework_3\obj\Debug\Homework_3.csproj.CoreCompileInputs.cache
+D:\Учеба\Programing\Skillbox\Homework_3\obj\Debug\Homework_3.exe
+D:\Учеба\Programing\Skillbox\Homework_3\obj\Debug\Homework_3.pdb
+D:\Учеба\Programing\Skillbox\Homework_3\obj\Debug\Homework_3.csproj.AssemblyReference.cache
