@@ -1,7 +1,0 @@
-D:\Учеба\Programing\Skillbox\Homework_1\bin\Debug\Homework_1.exe.config
-D:\Учеба\Programing\Skillbox\Homework_1\bin\Debug\Homework_1.exe
-D:\Учеба\Programing\Skillbox\Homework_1\bin\Debug\Homework_1.pdb
-D:\Учеба\Programing\Skillbox\Homework_1\obj\Debug\Homework_1.csproj.AssemblyReference.cache
-D:\Учеба\Programing\Skillbox\Homework_1\obj\Debug\Homework_1.csproj.CoreCompileInputs.cache
-D:\Учеба\Programing\Skillbox\Homework_1\obj\Debug\Homework_1.exe
-D:\Учеба\Programing\Skillbox\Homework_1\obj\Debug\Homework_1.pdb

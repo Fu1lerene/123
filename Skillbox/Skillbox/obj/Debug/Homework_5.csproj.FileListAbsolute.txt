@@ -1,6 +1,0 @@
-D:\Учеба\Programing\Skillbox\Skillbox\bin\Debug\Skillbox.exe.config
-D:\Учеба\Programing\Skillbox\Skillbox\bin\Debug\Skillbox.exe
-D:\Учеба\Programing\Skillbox\Skillbox\bin\Debug\Skillbox.pdb
-D:\Учеба\Programing\Skillbox\Skillbox\obj\Debug\Homework_5.csproj.CoreCompileInputs.cache
-D:\Учеба\Programing\Skillbox\Skillbox\obj\Debug\Skillbox.exe
-D:\Учеба\Programing\Skillbox\Skillbox\obj\Debug\Skillbox.pdb
