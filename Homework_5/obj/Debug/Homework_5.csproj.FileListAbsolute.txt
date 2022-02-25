@@ -1,6 +1,6 @@
-D:\Учеба\Programing\Skillbox\Skillbox\bin\Debug\Skillbox.exe.config
-D:\Учеба\Programing\Skillbox\Skillbox\bin\Debug\Skillbox.exe
-D:\Учеба\Programing\Skillbox\Skillbox\bin\Debug\Skillbox.pdb
-D:\Учеба\Programing\Skillbox\Skillbox\obj\Debug\Homework_5.csproj.CoreCompileInputs.cache
-D:\Учеба\Programing\Skillbox\Skillbox\obj\Debug\Skillbox.exe
-D:\Учеба\Programing\Skillbox\Skillbox\obj\Debug\Skillbox.pdb
+D:\Учеба\Programing\Skillbox\Homework_5\bin\Debug\Homework_5.exe.config
+D:\Учеба\Programing\Skillbox\Homework_5\bin\Debug\Homework_5.exe
+D:\Учеба\Programing\Skillbox\Homework_5\bin\Debug\Homework_5.pdb
+D:\Учеба\Programing\Skillbox\Homework_5\obj\Debug\Homework_5.csproj.CoreCompileInputs.cache
+D:\Учеба\Programing\Skillbox\Homework_5\obj\Debug\Homework_5.exe
+D:\Учеба\Programing\Skillbox\Homework_5\obj\Debug\Homework_5.pdb

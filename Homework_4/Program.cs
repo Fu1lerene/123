@@ -4,10 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Homework_5
+namespace Homework_4
 {
     class Program
     {
+        /// <summary>
+        /// Возвращает факториал заданного числа
+        /// </summary>
+        /// <param name="n">Число, факториал которого необходимо найти</param>
+        /// <returns></returns>
+        public static float factorial(int n)
+        {
+            float i, x = 1;
+            for (i = 1; i <= n; i++)
+            {
+                x *= i;
+            }
+            return x;
+        }
+
         /// <summary>
         /// Производит умножение матрицы на число и отображает результат
         /// </summary>
@@ -146,143 +161,115 @@ namespace Homework_5
             else Console.WriteLine("Ошибка! Матрицы несогласованы"); /// сообщение об ошибке, если матрицы несогласованы
         }
 
-        /// <summary>
-        /// Возвращает слово(а), содержащее минимальное или максимальное количество букв
-        /// </summary>
-        /// <param name="text">Текст, в котором ищется минимальное или максимальное слово(а)</param>
-        /// <param name="minOrmax">Переменная отвечающая за поиск минимального или максимального слова</param>
-        /// <returns></returns>
-        public static string Task_2(string text, string minOrmax)
-        {
-            string result = String.Empty; /// создание пустой строки
-            string[] split = text.Split(' ', ',', '.'); /// разделение строки на каждое отдельное слово и записывание этих слов в массив
-            int minLength = Int32.MaxValue; /// переменная для поиска минимума
-            int maxLength = Int32.MinValue; /// переменная для поиска максимума
-
-            if (minOrmax == "min" || minOrmax == "мин") /// условия для поиска минимального слова
-            {
-                for (int i = 0; i < split.Length; i++) /// цикл идущий по длине всего массива
-                {
-                    if (minLength == split[i].Length) /// запись нескольких слов в строчку, если таких слов несколько
-                        result += " " + split[i] + " ";
-
-                    if (split[i].Length < minLength) /// нахождение минимального слова
-                    {
-                        minLength = split[i].Length;
-                        result = split[i];
-                    }
-                }
-            }
-            else /// поиск максимального слова
-            {
-                for (int i = 0; i < split.Length; i++) /// цикл идущий по длине всего массива
-                {
-                    if (maxLength == split[i].Length) /// запись нескольких слов в строчку, если таких слов несколько
-                        result += " " + split[i] + " ";
-
-                    if (split[i].Length > maxLength) /// нахождение максимального слова
-                    {
-                        maxLength = split[i].Length;
-                        result = split[i];
-                    }
-                }
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// Возвращает текст, в котором все повторяющиеся буквы подряд заменены одной
-        /// </summary>
-        /// <param name="text">Текст, который нужно обработать</param>
-        /// <returns></returns>
-        public static string Task_3(string text)
-        {
-            string result = text; /// запись текста в новую переменную
-
-            for (int i = 0; i < result.Length - 1; ++i) /// цикл идущий по всему тексту кроме последней буквы
-            {
-                if (result[i] == result[i + 1]) /// проверка на повторение следующей буквы
-                {
-                    result = result.Remove(i, 1); /// удаление этой буквы
-                    i--;
-                }
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// Показывает является или не является последовательность чисел арифметической или геометрической прогрессией
-        /// </summary>
-        /// <param name="a">Последовательность чисел</param>
-        public static void Task_4(params int[] a)
-        {
-            int count_ap = 0; /// счетчик для арифметической прогрессии
-            int count_gp = 0; /// счетчик для геометрической прогрессии
-
-            for (int i = 1; i < a.Length - 1; ++i)
-            {
-                if (a[i] == (a[i - 1] + a[i + 1]) / 2) /// условие проверки является ли последовательность арифметической прогрессией
-                {
-                    count_ap++;
-                }
-            }
-
-            for (int i = 1; i < a.Length - 1; ++i)
-            {
-                if (Math.Abs(a[i]) == Math.Sqrt(a[i - 1] * a[i + 1])) /// условие проверки является ли последовательность геометрической прогрессией
-                {
-                    count_gp++;
-                }
-            }
-
-            if (count_ap == a.Length - 2)
-                Console.WriteLine("Это арифметическая прогрессия");
-
-            else if (count_gp == a.Length - 2)
-                Console.WriteLine("Это геометрическая прогрессия");
-
-            else Console.WriteLine("Не является арифметической или геометрической прогрессией");
-
-        }
-
-        /// <summary>
-        /// Возвращает значение функции Аккермана
-        /// </summary>
-        /// <param name="n">Первое принимаемое значение</param>
-        /// <param name="m">Второе принимаемое значение</param>
-        /// <returns></returns>
-        public static int Task_5(int n, int m)
-        {
-            int result = 0;
-
-            if (n == 0) /// первое условие функции Аккермана
-            {
-                result = ++m;
-            }
-
-            else if (n > 0 && m == 0) /// второе условие функции Аккермана
-            {
-                result = Task_5(n - 1, 1);
-            }
-
-            else if (n > 0 && m > 0) /// третье условие функции Аккермана
-            {
-                result = Task_5(n - 1, Task_5(n, m - 1));
-            }
-
-            return result;
-        }
-
-
         static void Main(string[] args)
         {
             #region Задание 1
 
-            /// Первая часть задания
+            int[] cost = new int[12];       /// массив расходов
+            int[] income = new int[12];     /// массив доходов
+            int[] profit = new int[12];     /// массив прибыли
+            int[] worst = new int[12];      /// массив для хранения месяцев худшей прибылью
+            int count_pos = 0;              /// счетчик для подсчетов месяцев с положительной прибылью
+            
+            Random rng = new Random();      /// выделение памяти для генератора случайных чисел
+
+            for (int i = 0; i < 12; ++i)    /// заполнение массивов расходов и доходов случайными числами
+            {
+                cost[i] = rng.Next(10, 100) * 1000;
+                income[i] = rng.Next(50, 200) * 1000;
+                profit[i] = income[i] - cost[i]; /// вычесление прибыли
+                if (profit[i] >= 0)  /// подсчет месяцев с положительной прибылью
+                {
+                    count_pos++;
+                }
+            }
+
+            Console.WriteLine($"{"Месяц",10} {"Доход, тыс. руб.",20} {"Расход, тыс. руб.",20} {"Прибыль, тыс. руб.",20}"); /// вывод шапки таблицы
+
+            for (int i = 0; i < 12; ++i) /// вывод всех массивов и месяцев
+            {
+                Console.WriteLine($"{i + 1,10} {income[i].ToString("## ###"), 20} {cost[i].ToString("## ###"),20}" +
+                    $" {profit[i].ToString("## ###"),20}");
+            }
+
+            for (int i = 0; i < 12; ++i) /// заполняем массив количеством месяцев (индексами)
+            {
+                worst[i] = i + 1;
+            }
+
+            int indx; /// переменная для хранения индекса минимального элемента массива
+
+            for (int i = 0; i < 12; ++i) /// проходим по массиву с начала и до конца
+            {
+                indx = i; /// считаем, что минимальный элемент имеет текущий индекс
+                for (int j = i; j < 12; ++j) /// ищем минимальный элемент в неотсортированной части
+                {
+                    if (profit[j] < profit[indx])
+                    {
+                        indx = j; /// нашли в массиве число меньше, чем profit[indx] - запоминаем его индекс в массиве
+                    }
+                }
+                if (profit[indx] == profit[i]) /// если минимальный элемент равен текущему значению - ничего не меняем
+                {
+                    continue;
+                }
+
+                int temp = profit[i];     /// временная переменная, чтобы не потерять значение profit[i]
+                profit[i] = profit[indx]; /// меняем местами минимальный элемент и первый в неотсортированной части
+                profit[indx] = temp;
+
+                temp = worst[i];          /// временная переменная, чтобы не потерять значение worst[i]
+                worst[i] = worst[indx];   /// меняем местами индексы
+                worst[indx] = temp;
+            }
+
+            Console.Write("Худшая прибыль в месяцах: ");
+            int k = 0;
+            for (int i = 0; profit[i] == profit[i-k] || i < 3; ++i) /// вывод худших месяцев
+            {
+                k = 1;
+                Console.Write($"{worst[i]} ");
+            }
+            Console.WriteLine($"\nМесяцев с положительной прибылью: {count_pos}"); /// вывод месяцев с положительной прибылью
+
+            #endregion
+ 
+            #region Задание 2
+
+            Console.WriteLine("\nВведите чило для построения треугольника Паскаля (N <= 15)");
+            int N = int.Parse(Console.ReadLine()); /// количество строчек в треугольнике
+            float var; /// переменная, в которую будет записываться каждый элемент в треугольнике
+
+            while (N > 15) /// проверка условия
+            {
+                Console.WriteLine("Введите другое число (N <= 15)");
+                N = int.Parse(Console.ReadLine());
+            }
+
+            for (int i = 0; i < N; ++i) /// построение треугольника (i - количество строчек)
+            {
+                for (int j = 0; j <= (N - i); j++) /// создаём после каждой строки n-i отступов от левой стороны консоли, чем ниже строка, тем меньше отступ
+                {
+                    Console.Write($"{" ", 3}");
+                }
+                for (int j = 0; j <= i; j++) /// создаём пробелы между элементами треугольника и вычисляем каждый элемент в строке
+                {
+                    Console.Write(" ");
+                    var = factorial(i) / (factorial(j) * factorial(i - j)); /// формула вычисления элементов треугольника
+                    Console.Write($"{var, 5}"); /// вывод элементов
+                }
+                Console.WriteLine(); /// после каждой строки с числами отступаем одну пустую строчку
+            }
+
+            #endregion
+
+            #region Задание 3
+
+            /// Первая часть задания 3
 
             int m, n; /// размерность матрицы
             double c; /// число на которое необходимо умножить
-            Console.WriteLine("Введите размерность матрицы");
+            Console.WriteLine("\nВведите размерность матрицы");
             m = int.Parse(Console.ReadLine());
             n = int.Parse(Console.ReadLine());
             while (m < 1 || n < 1) /// проверка на существование такой матрицы
@@ -343,58 +330,6 @@ namespace Homework_5
             //double[,] matrix2 = new double[a, b]; /// создание второй матрицы заданных размеров
 
             //Matrix_task_3(matrix, matrix2);
-
-            #endregion
-
-            #region Задание 2
-
-            Console.WriteLine("Введите текст:");
-            string test2 = Console.ReadLine();
-
-            Console.WriteLine("Введите (min/мин) или (max/макс) для поиска слова с минимальным или максимальным количеством букв: ");
-            string minOrmax = Console.ReadLine();
-
-            Console.WriteLine($"Ваше слово(а): {Task_2(test2, minOrmax)}");
-            //Console.WriteLine(Task_2("A ББ ВВВ ГГГГ ДДДД ДД ЕЕ ЖЖ ЗЗЗ", minOrmax)); /// код для проверки
-
-            #endregion
-
-            #region Задание 3
-
-            Console.WriteLine("Введите текст, в котором нужно удалить повторяющиеся буквы:");
-            string test3 = Console.ReadLine();
-
-            Console.WriteLine($"Измененный текст: {Task_3(test3)}");
-
-            //Console.WriteLine(Task_3("ПППОООГГГООООДДДААА")); /// код для тестирования
-            //Console.WriteLine(Task_3("ххххоооорррооошшшиий деееннннь")); /// код для тестирования
-
-            #endregion
-
-            #region Задание 4
-
-            Console.WriteLine("Введите последовательность чисел в строчку (через пробел):");
-            string test4 = Console.ReadLine();
-            var test4_int = test4.Split(' ', ',').Select(int.Parse).ToArray();
-
-            Task_4(test4_int);
-
-            //Task_4(1, 2, 4, 8, 16); /// код для тестирования
-            //Task_4(1, 2, 3, 4, 5); /// код для тестирования
-            //Task_4(1, 3, 4, 9, 18); /// код для тестирования
-
-            #endregion
-
-            #region Задание 5
-
-            int a, b;
-            Console.WriteLine("Введите два числа для функции Аккермана:");
-            a = int.Parse(Console.ReadLine());
-            b = int.Parse(Console.ReadLine());
-
-            Console.WriteLine($"Функция аккермана рана: {Task_5(a, b)}");
-
-            //Console.WriteLine(Task_5(1,1)); /// код для тестирования
 
             #endregion
         }

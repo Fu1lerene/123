@@ -20,7 +20,7 @@ namespace Homework_3
         public static void Game(string[] nicknames, int numberOfPlayers, int userTry_a, int userTry_b, int gameNumber_a, int gameNumber_b)
         {
             Random rng = new Random(); /// выделение памяти для генератора случайных чисел
-            string revenge = String.Empty; /// создание пустой строки для реванша
+            string revenge; /// создание строки для реванша
             int gameNumber = rng.Next(gameNumber_a, gameNumber_b); /// случайное загаданное число в выбранном диапозоне
             int userTry; /// число вводимое пользователем
             int player = 0; /// номер игрока на котором закончилась игра
@@ -34,7 +34,7 @@ namespace Homework_3
                     player = i; /// запоминание номера ходящего игрока
                     Console.Write($"Ход игрока {nicknames[i]}: ");
                     userTry = int.Parse(Console.ReadLine()); /// число, которое вводит пользователь
-                    while (userTry < userTry_a || userTry > userTry_b) /// условие удовлетворяющее диапазону вводимых чисел
+                    while (userTry < userTry_a || userTry > userTry_b || gameNumber - userTry < 0) /// условие удовлетворяющее диапазону вводимых чисел
                     {
                         Console.Write("Давай другое число: ");
                         userTry = int.Parse(Console.ReadLine());
@@ -49,58 +49,108 @@ namespace Homework_3
             Console.WriteLine("Хотите взять реванш? ");
             revenge = Console.ReadLine(); /// реванш?
 
-            if (revenge == "Да" || revenge == "да")
+            if (revenge == "Да" || revenge == "да") /// условие для реванша
             {
                 Game(nicknames, numberOfPlayers, userTry_a, userTry_b, gameNumber_a, gameNumber_b);
             }
         }
 
+        /// <summary>
+        /// Запускает однопользовательскую игру
+        /// </summary>
+        /// <param name="userTry_a">Нижняя граница вводимого числа</param>
+        /// <param name="userTry_b">Верхняя граница вводимого числа</param>
+        /// <param name="gameNumber_a">Верхняя граница случайного числа</param>
+        /// <param name="gameNumber_b">Верхняя граница случайного числа</param>
         public static void Game_Solo(int userTry_a, int userTry_b, int gameNumber_a, int gameNumber_b)
         {
-            string nickname;
-
+            string nickname; /// переменная для имени игрока
             Console.Write("Введите свой никнейм: ");
             nickname = Console.ReadLine();
-            bool flag = true;
-            string revenge = String.Empty; /// создание пустой строки для реванша
+
+            bool flag = true; /// ход игрока или компьютера
+            string revenge; /// создание пустой строки для реванша
+            int userTry; /// число вводимое пользователем
+            int compTry; /// временная переменная необходимая для хода компьютера
+
             Random rng = new Random(); /// выделение памяти для генератора случайных чисел
             int gameNumber = rng.Next(gameNumber_a, gameNumber_b); /// случайное загаданное число в выбранном диапозоне
-            int userTry; /// число вводимое пользователем
 
             Console.WriteLine($"Случайно загаданное число: {gameNumber}");
 
             while (gameNumber != 0) /// условие, при котором игра продолжается
             {
-                if (flag)
+                if (flag) /// ход игрока
                 {
                     Console.Write($"Ваш ход {nickname}: ");
                     userTry = int.Parse(Console.ReadLine()); /// число, которое вводит пользователь
-                    while (userTry < userTry_a || userTry > userTry_b) /// условие удовлетворяющее диапазону вводимых чисел
+                    while (userTry < userTry_a || userTry > userTry_b || gameNumber - userTry < 0) /// условие удовлетворяющее диапазону вводимых чисел
                     {
                         Console.Write("Давай другое число: ");
                         userTry = int.Parse(Console.ReadLine());
                     }
                     gameNumber -= userTry; /// вычитание введенного числа из загаданного (логика игры)
+                    flag = false; /// переход хода
                     if (gameNumber == 0) continue; /// условие выхода из цикла, чтобы gameNumber не стало < 0 из-за количества игроков
                     Console.WriteLine($"Новое значение числа: {gameNumber}");
-                    flag = false;
                 }
-                else
+                else /// ход компьютера
                 {
+                    compTry = userTry_a; /// минимальное значение вводимого числа
                     Console.Write("Ход компьютера: ");
-                    //if (gameNumber == )
+                    if (gameNumber > userTry_b) /// если победить невозможно на данный ход, компьютер вводит случайное число, удовлетворяющее правилам
+                    {
+                        compTry = rng.Next(userTry_a, userTry_b + 1);
+                        Console.WriteLine(compTry);
+                    }
+                    else /// иначе он введет число такое, что gameNumber станет равна нулю
+                    {
+                        for (int i = 0; i < userTry_b; ++i) /// цикл, который длится до максимального вводимого числа
+                        {
+                            if (gameNumber - compTry != 0 && compTry < userTry_b) /// перебор разности (gameNumber должна стать 0)
+                            {
+                                compTry++;
+                            }
+                            else /// вывод найденого числа и выход из цикла
+                            {
+                                Console.WriteLine(compTry);
+                                break;
+                            }
+                        }
+                    }
+                     
+                    gameNumber -= compTry; /// вычитание введенного числа из загаданного (логика игры)
+                    flag = true; /// переход хода
+                    if (gameNumber == 0) continue; /// условие выхода из цикла, чтобы gameNumber не стало < 0 из-за количества игроков
+                    Console.WriteLine($"Новое значение числа: {gameNumber}");
                 }
             }
 
-            revenge = Console.ReadLine(); /// реванш?
-
-            if (revenge == "Да" || revenge == "да")
+            if (flag) /// вывод текста о победителе в зависимости от того на ком закончился ход и предложение реванша при поражении (те же правила)
             {
-                ;
+                Console.WriteLine("Победил компютер, к сожалению, вы проиграли :(");
+                Console.WriteLine("Хотите взять реванш? ");
+
+                revenge = Console.ReadLine(); /// реванш?
+
+                if (revenge == "Да" || revenge == "да")
+                {
+                    Game_Solo(userTry_a, userTry_b, gameNumber_a, gameNumber_b);
+                }
+            }
+            else /// поздравление с победой и предложение повторить матч (те же правила)
+            {
+                Console.WriteLine("Поздравляем! Вы победили!");
+                Console.WriteLine("Хотите повторить реузльтат? ");
+                revenge = Console.ReadLine(); /// реванш?
+
+                if (revenge == "Да" || revenge == "да")
+                {
+                    Game_Solo(userTry_a, userTry_b, gameNumber_a, gameNumber_b);
+                }
             }
         }
 
-    
 
         static void Main(string[] args)
         {
@@ -110,7 +160,7 @@ namespace Homework_3
             Console.Write("Введите количество игроков: ");
             numberOfPlayers = int.Parse(Console.ReadLine());
 
-            if (numberOfPlayers == 1)
+            if (numberOfPlayers == 1) /// условие однопользовательской игры
             {
                 Console.Write("Укажите диапазон вводимого числа: ");
 
@@ -124,7 +174,7 @@ namespace Homework_3
                 gameNumber_a = int.Parse(Console.ReadLine()); /// нижний
                 gameNumber_b = int.Parse(Console.ReadLine()); /// верхний
 
-                Game_Solo(userTry_a, userTry_b, gameNumber_a, gameNumber_b);
+                Game_Solo(userTry_a, userTry_b, gameNumber_a, gameNumber_b); /// запуск однопользовательской игры с заданными правилами
             }
             else
             {
@@ -153,51 +203,8 @@ namespace Homework_3
                     Console.Write($"Игрок {i + 1}, введите свои никнейм: ");
                     nicknames[i] = Console.ReadLine();
                 }
-
                 Game(nicknames, numberOfPlayers, userTry_a, userTry_b, gameNumber_a, gameNumber_b); /// запуск многопользовательской игры
             }
-
-
-
-
-
-
-
-            // Написать игру, в которою могут играть два игрока.
-            // При старте, игрокам предлагается ввести свои никнеймы.
-            // Никнеймы хранятся до конца игры.
-            // Программа загадывает случайное число gameNumber от 12 до 120 сообщая это число игрокам.
-            // Игроки ходят по очереди(игра сообщает о ходе текущего игрока)
-            // Игрок, ход которого указан вводит число userTry, которое может принимать значения 1, 2, 3 или 4,
-            // введенное число вычитается из gameNumber
-            // Новое значение gameNumber показывается игрокам на экране.
-            // Выигрывает тот игрок, после чьего хода gameNumber обратилась в ноль.
-            // Игра поздравляет победителя, предлагая сыграть реванш
-            // 
-            // * Бонус:
-            // Подумать над возможностью реализации разных уровней сложности.
-            // В качестве уровней сложности может выступать настраиваемое, в начале игры,
-            // значение userTry, изменение диапазона gameNumber, или указание большего количества игроков (3, 4, 5...)
-
-            // *** Сложный бонус
-            // Подумать над возможностью реализации однопользовательской игры
-            // т е игрок должен играть с компьютером
-
-
-            // Демонстрация
-            // Число: 12,
-            // Ход User1: 3
-            //
-            // Число: 9
-            // Ход User2: 4
-            //
-            // Число: 5
-            // Ход User1: 2
-            //
-            // Число: 3
-            // Ход User2: 3
-            //
-            // User2 победил!
         }
     }
 }
