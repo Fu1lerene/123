@@ -13,7 +13,7 @@ namespace Homework_7
     public struct Note : IComparable
     {
         /// <summary>
-        /// Создание ежедневника для работы
+        /// Конструктор создания ежедневника для работы
         /// </summary>
         /// <param name="id">Id записи</param>
         /// <param name="firstName">Имя</param>
@@ -32,6 +32,8 @@ namespace Homework_7
             this.Notice = notice;
             this.Check = check;
         }
+
+        #region Классы
 
         /// <summary>
         /// Класс для сортировки по имени по убыванию
@@ -98,6 +100,10 @@ namespace Homework_7
             }
         }
 
+        #endregion
+
+        #region Методы
+
         /// <summary>
         /// Метод, который сравнивает текущий экземпляр с другим объектом того же типа и возвращает целое число
         /// </summary>
@@ -161,39 +167,41 @@ namespace Homework_7
             return $"{this.Id + 1,3} | {this.LastName,12} | {this.FirstName,12} | {this.Phone,15} | {this.Date.ToString("M"),15} {this.Date.ToString("ddd")} | {this.Notice,35} | {this.Check,5}";
         }
 
+        #endregion
+
+        #region Свойства
+
         /// <summary>
         /// Id записи
         /// </summary>
         public int Id { get; set; }
-
         /// <summary>
         /// Фамилия
         /// </summary>
         public string LastName { get; set; }
-
         /// <summary>
         /// Имя
         /// </summary>
         public string FirstName { get; set; }
-
         /// <summary>
         /// Номер телефона
         /// </summary>
         public string Phone { get; set; }
-
         /// <summary>
         /// Дата и время записи
         /// </summary>
         public DateTime Date { get; set; }
-
         /// <summary>
         /// Заметка
         /// </summary>
         public string Notice { get; set; }
-
         /// <summary>
         /// Статус выполенения
         /// </summary>
         public string Check { get; set; }
+
+        #endregion
+
+        
     }
 }

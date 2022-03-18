@@ -11,52 +11,9 @@ namespace Homework_7
     /// <summary>
     /// Ежедневник
     /// </summary>
-    public struct Diary
+    internal class Diary
     {
-        /// <summary>
-        /// Массив всех записей
-        /// </summary>
-        private Note[] notes;
-
-        /// <summary>
-        /// Путь к файлу
-        /// </summary>
-        private string Path;
-
-        /// <summary>
-        /// Порядковый номер записи
-        /// </summary>
-        int index;
-
-        /// <summary>
-        /// Число записей в ежедневнике (количество)
-        /// </summary>
-        public int Count { get; set; }
-
-        /// <summary>
-        /// База данных имён
-        /// </summary>
-        static readonly string[] firstNames;
-
-        /// <summary>
-        /// База данных фамилий
-        /// </summary>
-        static readonly string[] lastNames;
-
-        /// <summary>
-        /// База данных случайных заметок
-        /// </summary>
-        static readonly string[] rng_notice;
-
-        /// <summary>
-        /// Готовность записи
-        /// </summary>
-        static readonly string[] rng_check;
-
-        /// <summary>
-        /// Генератор псевдослучайных чисел
-        /// </summary>
-        static Random randomize;
+        #region Конструкторы
 
         /// <summary>
         /// Статический конструктор, в котором "хранятся"
@@ -115,7 +72,7 @@ namespace Homework_7
                 "Цветкова",
                 "Калинина"
             };
-            
+
             rng_notice = new string[] /// размещение случайных заметок в базе данных rng_notice
             {
                 "Приятная внешность",
@@ -156,6 +113,56 @@ namespace Homework_7
             this.index = 0;
             this.notes = new Note[2]; /// создаем изначально массив для 2 записей
         }
+
+        #endregion
+
+        #region Свойства
+
+        /// <summary>
+        /// Число записей в ежедневнике (количество)
+        /// </summary>
+        public int Count { get; set; }
+
+        #endregion
+
+        #region Поля
+
+        /// <summary>
+        /// Массив всех записей
+        /// </summary>
+        private Note[] notes;
+        /// <summary>
+        /// Путь к файлу
+        /// </summary>
+        private string Path;
+        /// <summary>
+        /// Порядковый номер записи
+        /// </summary>
+        int index;
+        /// <summary>
+        /// База данных имён
+        /// </summary>
+        static readonly string[] firstNames;
+        /// <summary>
+        /// База данных фамилий
+        /// </summary>
+        static readonly string[] lastNames;
+        /// <summary>
+        /// База данных случайных заметок
+        /// </summary>
+        static readonly string[] rng_notice;
+        /// <summary>
+        /// Готовность записи
+        /// </summary>
+        static readonly string[] rng_check;
+        /// <summary>
+        /// Генератор псевдослучайных чисел
+        /// </summary>
+        static Random randomize;
+
+        #endregion
+
+        #region Методы
 
         /// <summary>
         /// Добавление записи в ежедневник
@@ -425,5 +432,7 @@ namespace Homework_7
             }
             Unload_diary(path);
         }
+
+        #endregion
     }
 }
