@@ -5,3 +5,11 @@ D:\Учеба\Programing\Skillbox\Homework_2\obj\Debug\Homework_2.csproj.Assembl
 D:\Учеба\Programing\Skillbox\Homework_2\obj\Debug\Homework_2.csproj.CoreCompileInputs.cache
 D:\Учеба\Programing\Skillbox\Homework_2\obj\Debug\Homework_2.exe
 D:\Учеба\Programing\Skillbox\Homework_2\obj\Debug\Homework_2.pdb
+F:\Учеба\Programing\Skillbox\Homework_2\bin\Debug\Homework_2.exe.config
+F:\Учеба\Programing\Skillbox\Homework_2\bin\Debug\Homework_2.exe
+F:\Учеба\Programing\Skillbox\Homework_2\bin\Debug\Homework_2.pdb
+F:\Учеба\Programing\Skillbox\Homework_2\obj\Debug\Homework_2.csproj.AssemblyReference.cache
+F:\Учеба\Programing\Skillbox\Homework_2\obj\Debug\Homework_2.csproj.SuggestedBindingRedirects.cache
+F:\Учеба\Programing\Skillbox\Homework_2\obj\Debug\Homework_2.csproj.CoreCompileInputs.cache
+F:\Учеба\Programing\Skillbox\Homework_2\obj\Debug\Homework_2.exe
+F:\Учеба\Programing\Skillbox\Homework_2\obj\Debug\Homework_2.pdb
