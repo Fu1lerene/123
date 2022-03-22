@@ -1,0 +1,11 @@
+F:\Учеба\Programing\Skillbox\Homework_8\bin\Debug\Homework_8.exe.config
+F:\Учеба\Programing\Skillbox\Homework_8\bin\Debug\Homework_8.exe
+F:\Учеба\Programing\Skillbox\Homework_8\bin\Debug\Homework_8.pdb
+F:\Учеба\Programing\Skillbox\Homework_8\obj\Debug\Homework_8.csproj.AssemblyReference.cache
+F:\Учеба\Programing\Skillbox\Homework_8\obj\Debug\Homework_8.csproj.SuggestedBindingRedirects.cache
+F:\Учеба\Programing\Skillbox\Homework_8\obj\Debug\Homework_8.csproj.CoreCompileInputs.cache
+F:\Учеба\Programing\Skillbox\Homework_8\obj\Debug\Homework_8.exe
+F:\Учеба\Programing\Skillbox\Homework_8\obj\Debug\Homework_8.pdb
+F:\Учеба\Programing\Skillbox\Homework_8\obj\Debug\Homework_8.csproj.CopyComplete
+F:\Учеба\Programing\Skillbox\Homework_8\bin\Debug\Newtonsoft.Json.dll
+F:\Учеба\Programing\Skillbox\Homework_8\bin\Debug\Newtonsoft.Json.xml
