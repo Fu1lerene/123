@@ -19,14 +19,14 @@ namespace Homework_9
     {
         static async Task Main(string[] args)
         {
-            var token = System.IO.File.ReadAllText("token.txt");
+            var token = System.IO.File.ReadAllText("token.txt"); /// считываем токен из файла
 
-            var bot = new TelegramBotClient(token);
-            var cts = new CancellationTokenSource();
+            var bot = new TelegramBotClient(token); /// создаем клиент бота
+            var cts = new CancellationTokenSource(); /// сигнал отмены
 
             var receiverOptions = new ReceiverOptions
             {
-                AllowedUpdates = { } // receive all update types
+                AllowedUpdates = { }
             };
 
             bot.StartReceiving(
@@ -35,10 +35,9 @@ namespace Homework_9
                 receiverOptions,
                 cancellationToken: cts.Token);
 
-            var me = await bot.GetMeAsync();
+            var me = await bot.GetMeAsync(); /// получение всех данных о боте
 
-
-            Console.WriteLine($"Start listening for @{me.Username}");
+            Console.WriteLine($"@{me.Username} слушает"); 
 
             Console.ReadKey();
 
@@ -46,59 +45,66 @@ namespace Homework_9
 
             async Task HandleUpdateAsync(ITelegramBotClient bot, Update update, CancellationToken cancellationToken)
             {
+                /// проверка на то, что отправляемое сообщение является допустимым
                 if (update.Type != UpdateType.Message)
                     return;
 
-                var chatId = update.Message.Chat.Id;
-                const string password = "Aboba";
+                var chatId = update.Message.Chat.Id; /// чат id
 
-                Console.WriteLine($"Мне пишет: {update.Message.From.FirstName} {update.Message.From.LastName} {update.Message.From.Id}, id чата: {chatId}");
+                Console.WriteLine($"Мне пишет: {update.Message.From.FirstName} {update.Message.From.LastName} {update.Message.From.Id}, id чата: {chatId}"); /// информация о пользователе
 
+                /// Блок выполнения кода, если отправлен документ
                 if (update.Message!.Type == MessageType.Document)
                 {
-                    var messageDoc = update.Message.Document;
-                    Console.WriteLine($"Вам отправили: {update.Message.Type}");
-                    Download(messageDoc.FileId, messageDoc.FileName);
+                    var messageDoc = update.Message.Document; /// присваиваем переменной отправленный документ
+                    Console.WriteLine($"Вам отправили: {update.Message.Type}"); /// тип отправленного сообщения
+                    Download(messageDoc.FileId, messageDoc.FileName); /// скачивание документа на компьютер
                     return;
                 }
 
+                /// Блок выполнения кода, если отправлено фото
                 if (update.Message!.Type == MessageType.Photo)
                 {
-                    var messagePhoto = update.Message.Photo;
-                    Console.WriteLine($"Вам отправили: {update.Message.Type}");
-                    Download(messagePhoto[3].FileId, $"Photo_{messagePhoto[3].FileId}.jpg");
+                    var messagePhoto = update.Message.Photo; /// присваиваем переменной отправленное фото
+                    Console.WriteLine($"Вам отправили: {update.Message.Type}"); /// тип отправленного сообщения
+                    Download(messagePhoto[messagePhoto.Length - 1].FileId, $"Photo_{messagePhoto[messagePhoto.Length - 1].FileId}.jpg"); /// скачивание фото на компьютер
                     return;
                 }
 
+                /// Блок выполнения кода, если отправлено аудио
                 if (update.Message!.Type == MessageType.Audio)
                 {
-                    var messageAudio = update.Message.Audio;
-                    Console.WriteLine($"Вам отправили: {update.Message.Type}");
-                    Download(messageAudio.FileId, messageAudio.FileName);
+                    var messageAudio = update.Message.Audio; /// присваиваем переменной отправленное аудио
+                    Console.WriteLine($"Вам отправили: {update.Message.Type}"); /// тип отправленного сообщения
+                    Download(messageAudio.FileId, messageAudio.FileName); /// скачивание аудио на компьютер
                     return;
                 }
 
+                /// Блок выполнения кода, если отправлено видео
                 if (update.Message!.Type == MessageType.Video)
                 {
-                    var messageVideo = update.Message.Video;
-                    Console.WriteLine($"Вам отправили: {update.Message.Type}");
-                    Download(messageVideo.FileId, messageVideo.FileName);
+                    var messageVideo = update.Message.Video; /// присваиваем переменной отправленное видео
+                    Console.WriteLine($"Вам отправили: {update.Message.Type}"); /// тип отправленного сообщения
+                    Download(messageVideo.FileId, messageVideo.FileName);  /// скачивание видео на компьютер
                     return;
                 }
 
+                /// Блок выполнения кода, если отправлен текст
                 if (update.Message!.Type == MessageType.Text)
                 {
-                    var messageText = update.Message.Text;
+                    var messageText = update.Message.Text;  /// присваиваем переменной отправленный текст
 
-                    Console.WriteLine($"Сообщение которое мне прислали: {messageText}");
+                    Console.WriteLine($"Сообщение которое мне прислали: {messageText}"); /// отображения текста, которое было прислано
 
+                    /// Команда /start или /help
                     if (messageText == "/start" || messageText == "/help")
                     {
                         await bot.SendTextMessageAsync(chatId, $"Привет, {update.Message.From.FirstName}!\n" +
-                            $"Вот что я могу:\n" +
-                            $"1. Здароваться\n" +
-                            $"2. Отвечать на бибу и бобу\n" +
-                            $"3. Принимать фото, видео, аудио и документы и скачивать их себе на компуктер");
+                            $"Вот, что я могу:\n" +
+                            $"- Здороваться\n" +
+                            $"- Отвечать на бибу и бобу\n" +
+                            $"- Принимать фото, видео, аудио и документы и скачивать их себе на компуктер\n" +
+                            $"- Отправлять мемы, фото, видео и музыку (напишите, например, \"Мемы\")");
                         Console.WriteLine("Бот дал информацию (/help)");
                     }
 
@@ -114,91 +120,62 @@ namespace Homework_9
                         Console.WriteLine("Бот ответил: Боба");
                     }
 
+                    /// Приветствие собеседника
                     if (messageText == "hi" || messageText == "привет" || messageText == "Привет" || messageText == "Hello")
                     {
                         await bot.SendTextMessageAsync(chatId, $"Здравствуй, {update.Message.From.FirstName}!");
                         Console.WriteLine($"Бот ответил: {update.Message.From.FirstName}");
                     }
 
+                    /// Отправка случайных мемов со страницы гитхаба
+                    if (messageText == "Мемы")
+                    {
+                        Random rng = new Random();
+                        string path = $"https://github.com/Fu1lerene/Homework-from-the-.NET-Developer-course/raw/main/Homework_9/SentMedia/Memes/Meme_{rng.Next(1, 6)}.jpg";
+                        Message messagePhoto = await bot.SendPhotoAsync(chatId, path);
+                        Console.WriteLine("Бот отправил мем");
+                    }
+
+                    /// Отправка аудио
+                    if (messageText == "Музыка")
+                    {
+                        string path = $"https://github.com/Fu1lerene/Homework-from-the-.NET-Developer-course/raw/main/Homework_9/SentMedia/Audio/Architects - A Wasted Hymn (Acoustic).mp3";
+                        Message messagePhoto = await bot.SendAudioAsync(chatId, path);
+                        Console.WriteLine("Бот отправил аудио");
+                    }
+
+                    /// Отправка фото
                     if (messageText == "Фото")
                     {
-                        //Message messagePhoto = await bot.SendPhotoAsync(chatId, )
+                        string path = $"https://raw.githubusercontent.com/Fu1lerene/Homework-from-the-.NET-Developer-course/main/Homework_9/SentMedia/Photo/Mirana.jpg";
+                        Message messagePhoto = await bot.SendPhotoAsync(chatId, path);
+                        Console.WriteLine("Бот отправил фото");
+                    }
+
+                    /// Отправка видео
+                    if (messageText == "Видео")
+                    {
+                        string path = $"https://github.com/Fu1lerene/Homework-from-the-.NET-Developer-course/raw/main/Homework_9/SentMedia/Video/View.mp4";
+                        Message messagePhoto = await bot.SendVideoAsync(chatId, path);
+                        Console.WriteLine("Бот отправил видео");
                     }
 
                     return;
                 }
 
-
-
+                /// Скачивания в указанную папку
                 async void Download(string fileId, string path)
                 {
-                    FileStream fs = new FileStream("F:/Учеба/Programing/Skillbox/Homework_9/bin/Debug/netcoreapp3.1/Media/_" + path, FileMode.Create);
+                    FileStream fs = new FileStream("F:/Учеба/Programing/Skillbox/Homework_9/DownloadMedia/" + path, FileMode.Create);
                     await bot.GetInfoAndDownloadFileAsync(fileId, fs);
                     fs.Close();
                     fs.Dispose();
                 }
 
-
-                //Message message = await botClient.SendTextMessageAsync(
-                //    chatId: chatId,
-                //    text: "*Trying* all the parameters of `sendMessage` method",
-                //    parseMode: ParseMode.MarkdownV2,
-                //    disableNotification: true,
-                //    replyToMessageId: update.Message.MessageId,
-                //    replyMarkup: new InlineKeyboardMarkup(
-                //        InlineKeyboardButton.WithUrl(
-                //            "Check sendMessage method",
-                //            "https://core.telegram.org/bots/api#sendmessage")),
-                //    cancellationToken: cancellationToken);
-
-                //Console.WriteLine(
-                //        $"{message.From.FirstName} sent message {message.MessageId} " +
-                //        $"to chat {message.Chat.Id} at {message.Date}. " +
-                //        $"It is a reply to message {message.ReplyToMessage.MessageId} " +
-                //        $"and has {message.Entities.Length} message entities.");
-
-
-                //Message message = await botClient.SendPhotoAsync(
-                //    chatId: chatId,
-                //    photo: "https://github.com/TelegramBots/book/raw/master/src/docs/photo-ara.jpg",
-                //    caption: "<b>Ara bird</b>. <i>Source</i>: <a href=\"https://pixabay.com\">Pixabay</a>",
-                //    parseMode: ParseMode.Html,
-                //    cancellationToken: cancellationToken);
-
-                //Message message1 = await botClient.SendStickerAsync(
-                //    chatId: chatId,
-                //    sticker: "https://github.com/TelegramBots/book/raw/master/src/docs/sticker-fred.webp",
-                //    cancellationToken: cancellationToken);
-
-                //Message message2 = await botClient.SendStickerAsync(
-                //    chatId: chatId,
-                //    sticker: message1.Sticker.FileId,
-                //    cancellationToken: cancellationToken);
-
-                //Message message = await botClient.SendAudioAsync(
-                //    chatId: chatId,
-                //    audio: "https://github.com/TelegramBots/book/raw/master/src/docs/audio-guitar.mp3",
-                //    cancellationToken: cancellationToken);
-
-                //            Message[] messages = await botClient.SendMediaGroupAsync(
-                //                chatId: chatId,
-                //                media: new IAlbumInputMedia[]
-                //                {
-                //                    new InputMediaPhoto("https://cdn.pixabay.com/photo/2017/06/20/19/22/fuchs-2424369_640.jpg"),
-                //                    new InputMediaPhoto("https://cdn.pixabay.com/photo/2017/04/11/21/34/giraffe-2222908_640.jpg"),
-                //                },
-                //                cancellationToken: cancellationToken);
-                //            Message message3 = await botClient.SendDocumentAsync(
-                //chatId: chatId,
-                //document: "https://github.com/TelegramBots/book/raw/master/src/docs/photo-ara.jpg",
-                //caption: "<b>Ara bird</b>. <i>Source</i>: <a href=\"https://pixabay.com\">Pixabay</a>",
-                //parseMode: ParseMode.Html,
-                //cancellationToken: cancellationToken);
-
-
             }
 
 
+            /// Исключения
             Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
             {
                 var ErrorMessage = exception switch
