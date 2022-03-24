@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "d4la2Gl0KMErGZ5gpEX70GaKF38u6nR18HwD5geFExuemKHYZD3vardNRkfBRVYanb7HBckkBAVWM7I9AqGFaQ==",
+  "success": true,
+  "projectFilePath": "F:\\Учеба\\Programing\\Skillbox\\Homework_9\\Homework_9.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Fullerene\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\Fullerene\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512",
+    "C:\\Users\\Fullerene\\.nuget\\packages\\telegram.bot\\17.0.0\\telegram.bot.17.0.0.nupkg.sha512",
+    "C:\\Users\\Fullerene\\.nuget\\packages\\telegram.bot.extensions.polling\\1.0.2\\telegram.bot.extensions.polling.1.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
