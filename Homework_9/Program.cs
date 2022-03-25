@@ -51,6 +51,15 @@ namespace Homework_9
 
                 var chatId = update.Message.Chat.Id; /// чат id
 
+                /// Кнопки с ключевыми словами
+                ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup(new[]
+                {
+                        new KeyboardButton[] { "Мемы", "Фото", "Видео", "Музыка", "/help" },
+                })
+                {
+                    ResizeKeyboard = true
+                };
+
                 Console.WriteLine($"Мне пишет: {update.Message.From.FirstName} {update.Message.From.LastName} {update.Message.From.Id}, id чата: {chatId}"); /// информация о пользователе
 
                 /// Блок выполнения кода, если отправлен документ
@@ -104,7 +113,7 @@ namespace Homework_9
                             $"- Здороваться\n" +
                             $"- Отвечать на бибу и бобу\n" +
                             $"- Принимать фото, видео, аудио и документы и скачивать их себе на компуктер\n" +
-                            $"- Отправлять мемы, фото, видео и музыку (напишите, например, \"Мемы\")");
+                            $"- Отправлять мемы, фото, видео и музыку (напишите, например, \"Мемы\")", replyMarkup: replyKeyboardMarkup);
                         Console.WriteLine("Бот дал информацию (/help)");
                     }
 
