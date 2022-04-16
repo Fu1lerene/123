@@ -5,7 +5,6 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-//using Newtonsoft.Json;
 using System.Text.Json;
 
 namespace Homework_10
@@ -23,7 +22,6 @@ namespace Homework_10
             workers = new List<Worker>();
             rng = new Random();
             Level = 1;
-            IDWorker = 1;
             /// создание организации как отдела с единственным директором
             depts.Add(new Department(
                 Name,
@@ -49,10 +47,6 @@ namespace Homework_10
         /// Уровень (глубина отделов в организации)
         /// </summary>
         private int Level { get; set; }
-        /// <summary>
-        /// ID сотрудника
-        /// </summary>
-        public int IDWorker { get; set; }
         /// <summary>
         /// Случайное число
         /// </summary>
@@ -89,13 +83,12 @@ namespace Homework_10
         private List<Worker> CreateDirector()
         {
             workers.Add(new Worker(
-                0,
                 "Александр",
                 "Ковалев",
                 "Директор",
                 0,
                 22,
-                $"\"{Name}\"",
+                $"{Name}",
                 0,
                 100500));
 
@@ -179,9 +172,9 @@ namespace Homework_10
             {
                 string pos = i == 1 ? "Начальник" : (i <= numbOfWorkers/2+1 ? "Специалист" : "Интерн"); /// выдача должностей (всегда 1 начальник, и примерно поровну остальных)
                 int salary = i == 1 ? 0 : (i <= numbOfWorkers / 2 + 1 ? rng.Next(10, 20) : rng.Next(500, 751)); /// выдача зарплат специалистам и интернам случайным образом
+                int IDWorker = workers[0].GetStaticId(); /// текущий номер сотрудника
 
                 workers.Add(new Worker(
-                    IDWorker,
                     $"Имя_{IDWorker}",
                     $"Фамилия_{IDWorker}",
                     pos,
@@ -190,8 +183,6 @@ namespace Homework_10
                     $"Отдел_{lvlDept}_{IDDept}",
                     salary,
                     rng.Next(1, 6)));
-
-                IDWorker++; /// прибавляем номер сотрудника
             }
 
             PaySalary(numbOfWorkers, IDDept, index);
@@ -286,6 +277,11 @@ namespace Homework_10
                 default:
                     break;
             }
+        }
+
+        public void DeleteWorker(int i)
+        {
+            
         }
 
         #endregion

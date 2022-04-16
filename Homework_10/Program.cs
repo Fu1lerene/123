@@ -13,15 +13,15 @@ namespace Homework_10
         static void Main(string[] args)
         {
             /// Создание организаций со случайным количеством отделов и сотрудников
-            Organization organization = new Organization("Excalibur");
+            //Organization organization = new Organization("Excalibur");
             //Organization org2 = new Organization("Fullerene");
             //Organization org3 = new Organization("OAO Coding");
 
             // Вывод всей информации до сортировки и после
-            organization.PrintToConsoleDepts();
-            organization.PrintToConsoleWorkers();
-            organization.Sort();
-            organization.PrintToConsoleWorkers();
+            //organization.PrintToConsoleDepts();
+            //organization.PrintToConsoleWorkers();
+            //organization.Sort();
+            //organization.PrintToConsoleWorkers();
 
             /// Пример сериализации в json файл
             //string jsonString = JsonSerializer.Serialize(organization);

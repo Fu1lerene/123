@@ -28,9 +28,9 @@ namespace Homework_10
         /// <param name="dept">Отдел</param>
         /// <param name="salary">Зарплата</param>
         /// <param name="numberOfProjects">Количество проектов</param>
-        public Worker(int id, string firstname, string lastname, string position, int lvl, int age, string dept, double salary, int numberOfProjects)
+        public Worker(string firstname, string lastname, string position, int lvl, int age, string dept, double salary, int numberOfProjects)
         {
-            Id = id;
+            Id = Worker.NextId();
             Firstname = firstname;
             Lastname = lastname;
             Position = position;
@@ -40,6 +40,19 @@ namespace Homework_10
             NumberOfProjects = numberOfProjects;
             Lvl = lvl;
         }
+
+        /// <summary>
+        /// Статический конструктор
+        /// </summary>
+        static Worker()
+        {
+            staticId = 0;
+        }
+
+        /// <summary>
+        /// Статическое поле staticId
+        /// </summary>
+        private static int staticId;
 
         #region Свойства
 
@@ -95,6 +108,25 @@ namespace Homework_10
             else if (Position == "Интерн")
                 return $"{Id,5} {Firstname,10} {Lastname,15} {Position,15} {Lvl,10} {Age,10} {Dept,15} {$"${Salary}",15} {NumberOfProjects,20}";
             else return $"{Id,5} {Firstname,10} {Lastname,15} {Position,15} {Lvl,10} {Age,10} {Dept,15} {$"${Salary}",15} {NumberOfProjects,20}";
+        }
+
+        /// <summary>
+        /// Статический метод возвращающий следующие Id
+        /// </summary>
+        /// <returns></returns>
+        private static int NextId()
+        {
+            staticId++;
+            return staticId;
+        }
+
+        /// <summary>
+        /// Метод, позволяющий получить текущее значение staticId
+        /// </summary>
+        /// <returns></returns>
+        public int GetStaticId()
+        {
+            return staticId;
         }
 
         #endregion
