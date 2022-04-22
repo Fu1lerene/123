@@ -37,7 +37,7 @@ namespace Homework_11_WPF
         }
 
         /// <summary>
-        /// Событие при нажатии кнопки "Загрузить"
+        /// Событие при нажатии "Загрузить"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
